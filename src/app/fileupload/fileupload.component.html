@@ -1,0 +1,13 @@
+<div>
+  <form #form="ngForm" (ngSubmit)="formSubmit(form.value)" novalidate>
+    <div>
+      <label>Title</label>
+      <input type="text" name="title" [(ngModel)]="model.title" placeholder="Enter Title"/>
+    </div>
+    <div>
+      <label>Select File</label>
+      <input type="file" name="filename" (change)="fileChangeEvent($event)"/>
+    </div>
+    <input type="submit" />
+  </form>
+</div>
