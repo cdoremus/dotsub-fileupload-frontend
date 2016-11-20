@@ -1,13 +1,40 @@
-<div>
-  <form #form="ngForm" (ngSubmit)="formSubmit(form.value)" novalidate>
-    <div>
-      <label>Title</label>
-      <input type="text" name="title" [(ngModel)]="model.title" placeholder="Enter Title"/>
+<div class="form-container">
+  <div class="upload-message" *ngIf="message">{{ message | json }}</div>
+  <form #form="ngForm" (ngSubmit)="submitFileMetadata(form.value)" novalidate>
+    <div class="form-group" [class.has-error]="title.invalid && title.touched">
+      <label class="control-label form-label" style="text-align:left">Title</label>
+      <input type="text" class="form-control" #title="ngModel" name="title" [(ngModel)]="model.title" placeholder="Enter Title"/>
+      <div *ngIf="title.invalid && title.touched" class="alert alert-danger">
+          Title is required.
+      </div>
+    </div>
+    <div class="form-group" [class.has-error]="description.invalid && description.touched">
+      <label class="control-label">Description</label>
+      <input type="text" class="form-control" #description="ngModel"  name="description" [(ngModel)]="model.description" placeholder="Enter Description"/>
+      <div *ngIf="description.invalid && description.touched" class="alert alert-danger">
+          Description is required.
+      </div>
+    </div>
+    <div class="form-group" [class.has-error]="filename.invalid && filename.touched">
+      <label class="control-label">File name</label>
+      <input type="text" class="form-control" #filename="ngModel" name="filename" [(ngModel)]="model.filename" placeholder="Enter File Name"/>
+      <div *ngIf="filename.invalid && filename.touched" class="alert alert-danger">
+          File name is required.
+      </div>
+    </div>
+    <div class="form-group" [class.has-error]="createDate.invalid && createDate.touched">
+      <label class="control-label">Creation date</label>
+      <input type="text" class="form-control" #createDate="ngModel" name="createDate" [(ngModel)]="model.createDate" placeholder="Enter Creation Date"/>
+      <div *ngIf="createDate.invalid && createDate.touched" class="alert alert-danger">
+          Creation Date is required.
+      </div>
     </div>
     <div>
-      <label>Select File</label>
-      <input type="file" name="filename" (change)="fileChangeEvent($event)"/>
+      <label class="control-label">Select File</label>
+      <!-- input type="file" name="filename" (change)="fileChangeEvent($event)"/ -->
     </div>
-    <input type="submit" />
+    <input type="submit"  class="btn btn-primary" value="Submit"/>
   </form>
 </div>
+
+<my-filedatatable [fileDataList]="fileDataList"></my-filedatatable>

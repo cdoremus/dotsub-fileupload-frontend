@@ -1,0 +1,12 @@
+.form-container {
+    width: 600px;
+}
+
+.upload-message {
+    border: 2px solid black;
+    color: red;
+}
+
+.form-container label.form-label {
+    text-align: left;
+}

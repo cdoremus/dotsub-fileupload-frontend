@@ -1,3 +1,4 @@
+import { FileDataTableComponent } from './filedatatable/filedatatable.component';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -23,7 +24,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    FileDataTableComponent
   ],
   providers: [
     ApiService
