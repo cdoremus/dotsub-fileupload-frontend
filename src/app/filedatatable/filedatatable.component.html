@@ -1,0 +1,22 @@
+<div *ngIf="fileDataList && fileDataList.length > 0">
+    <div class="table-legend">Uploaded Files</div>
+    <div class="table-container">
+        <table class="centerTable">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>File Name</th>
+                <th>Creation Date</th>
+            </tr>
+            <tr *ngFor="let file of fileDataList">
+                <td>{{ file.id }}</td>
+                <td>{{ file.title }}</td>
+                <td>{{ file.description }}</td>
+                <td>{{ file.filename }}</td>
+                <td>{{ file.createDate }}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>

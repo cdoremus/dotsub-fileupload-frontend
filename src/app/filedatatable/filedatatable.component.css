@@ -1,0 +1,15 @@
+table, tr, th, td {
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.centerTable {
+     margin: 0px auto;
+}
+
+.table-legend {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+}
