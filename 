@@ -1,0 +1,23 @@
+[33mcommit 3ea2fe72aa19ac60266472509a11354b3c7912cc[m
+Author: Craig Doremus <cdoremus@gmail.com>
+Date:   Fri Nov 18 11:20:53 2016 -0500
+
+    Changed server port to 8000
+
+[33mcommit e7dd9341a59723f9fde25553f85d17d0a7ae5010[m
+Author: Craig Doremus <cdoremus@gmail.com>
+Date:   Thu Nov 17 21:09:27 2016 -0500
+
+    Fleshed out FileUploadComponent
+
+[33mcommit 4ba5203002272adc72851140d2a1b0baf96d48bd[m
+Author: Craig Doremus <cdoremus@gmail.com>
+Date:   Thu Nov 17 18:01:27 2016 -0500
+
+    Replaced with dotsub icon
+
+[33mcommit 5fa54aa1294d2d60a4bb0ea23d783310662aa8d8[m
+Author: Craig Doremus <cdoremus@gmail.com>
+Date:   Thu Nov 17 17:54:54 2016 -0500
+
+    Initial commit from angular2-webpack seed
