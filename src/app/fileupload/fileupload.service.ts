@@ -16,21 +16,22 @@ export class FileUploadService {
     constructor(private http: Http) {
     }
 
-    upload(file: File): Observable<Response> {
+    upload(file: File): Observable<FileData> {
         console.log(`File to upload in FileUploadService: `, file);
         let formData: FormData = new FormData();
         formData.append('uploadedFile', file);
-        let headers: Headers = new Headers();
-        headers.append('Content-Type', 'multipart/form-data; boundary=foobarbaz');
-        headers.append('Accept', 'application/json');
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(API_UPLOAD_URL, formData, options)
+        // let headers: Headers = new Headers();
+        // headers.append('Content-Type', 'multipart/form-data; boundary=foobarbaz');
+        // headers.append('Accept', 'application/json');
+        // let options = new RequestOptions({ headers: headers });
+        return this.http.post(API_UPLOAD_URL, formData)
             .map((response: Response) => response.json())
             .catch(error => Observable.throw(error));
     }
 
     saveFileMetadata(fileData: FileData) {
         let formData: FormData = new FormData();
+        formData.append('id', fileData.id);
         formData.append('title', fileData.title);
         formData.append('description', fileData.description);
         formData.append('filename', fileData.filename);

@@ -60,12 +60,13 @@ export class FileUploadComponent implements OnInit, OnDestroy {
         .subscribe( resp => {
             console.log('submitFileMetadata() response: ', resp);
             this.message = resp;
-            this.findAllMetatdata();
         },
         error => {
             console.log('Error submitting file metatdata', error);
             this.message = error;
-        });
+        },
+        // on completion, refresh metatdata list
+        () => this.findAllMetatdata());
   }
 
   findAllMetatdata() {
@@ -103,8 +104,24 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     }
   }
 
-   fileChangeEvent(fileInput: any) {
+   uploadFile(fileInput: any) {
         this.filesToUpload = <Array<File>> fileInput.target.files;
         console.log('File selected: ', this.filesToUpload);
+        if (this.filesToUpload && this.filesToUpload.length > 0) {
+            let file: File = this.filesToUpload[0];
+            this.uploadService.upload(file)
+                .subscribe(resp => {
+                    this.model = resp;
+                    this.message = `Upload success for file ${file.name}`;
+                    console.log(this.message);
+                },
+                error => {
+                    console.log('Error finding all file metatdata', error);
+                    this.message = error;
+                });
+        } else {
+            this.message = 'No upload files available';
+            console.log(this.message);
+        }
     }
 }
