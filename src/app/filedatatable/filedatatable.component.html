@@ -6,14 +6,14 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>File Name</th>
+                <th>Uploaded File</th>
                 <th>Creation Date</th>
             </tr>
             <tr *ngFor="let file of fileDataList">
                 <td>{{ file.id }}</td>
                 <td>{{ file.title }}</td>
                 <td>{{ file.description }}</td>
-                <td>{{ file.filename }}</td>
+                <td><a href="http://localhost:8080/uploadservice/files/{{ file.filename }}">{{ file.filename }}</a></td>
                 <td>{{ file.createDate }}</td>
             </tr>
         </table>
