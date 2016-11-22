@@ -1,11 +1,11 @@
 describe('App', function () {
-
+  const title = 'Angular 2 File Upload Form with Spring Rest Controller Back End';
   beforeEach(function () {
     browser.get('/');
   });
 
   it('should have a title', function () {
-    expect(browser.getTitle()).toEqual("Angular 2 App | ng2-webpack");
+    expect(browser.getTitle()).toEqual(title);
   });
 
   it('should have <header>', function () {
@@ -17,7 +17,7 @@ describe('App', function () {
   });
 
   it('should have a main title', function () {
-    expect(element(by.css('main h1')).getText()).toEqual('Hello from Angular 2!');
+    expect(element(by.css('main h3')).getText()).toEqual(title);
   });
 
   it('should have <footer>', function () {
