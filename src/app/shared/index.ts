@@ -1,1 +1,2 @@
-export * from './api.service';
+export * from './file.model';
+export * from './file.error';
