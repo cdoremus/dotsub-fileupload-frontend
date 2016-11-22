@@ -21,9 +21,9 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   hasUploadedFile: boolean = false;
 
   // Observable subscriptions that need to be unsubscribed
-  private uploadFileSubscription: Subscription;
-  private submitFileMetadataSubscription: Subscription;
-  private findAllMetatdataSubscription: Subscription;
+  uploadFileSubscription: Subscription;
+  submitFileMetadataSubscription: Subscription;
+  findAllMetatdataSubscription: Subscription;
 
 
   constructor(private uploadService: FileUploadService) {
@@ -68,7 +68,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   findAllMetatdata() {
       this.findAllMetatdataSubscription = this.uploadService.findAllMetadata()
         .subscribe( resp => {
-            console.log('findAllMetatdata() response: ', resp);
             this.fileDataList = resp;
         },
         error => {
@@ -79,7 +78,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
    uploadFile(fileInput: any) {
         this.filesToUpload = <Array<File>> fileInput.target.files;
-        console.log('File selected: ', this.filesToUpload);
+        // console.log('File selected: ', this.filesToUpload);
         if (this.filesToUpload && this.filesToUpload.length > 0) {
             let file: File = this.filesToUpload[0];
             this.uploadFileSubscription = this.uploadService.upload(file)

@@ -19,7 +19,7 @@ export class FileUploadService {
     }
 
     upload(file: File): Observable<FileData> {
-        console.log(`File to upload in FileUploadService: `, file);
+        // console.log(`File to upload in FileUploadService: `, file);
         let formData: FormData = new FormData();
         formData.append('uploadedFile', file);
         // Note: Do NOT add headers
