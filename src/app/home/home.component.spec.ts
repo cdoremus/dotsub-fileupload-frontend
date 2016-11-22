@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { Http, BaseRequestOptions } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 import { FileDataTableComponent } from './../filedatatable/filedatatable.component';
 import { FileUploadComponent } from './../fileupload/fileupload.component';
 import { FileUploadService } from './../fileupload/fileupload.service';
