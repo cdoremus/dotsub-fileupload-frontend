@@ -5,8 +5,7 @@ import { FileData } from './../shared/file.model';
 
 @Component({
     selector: 'my-fileupload',
-    templateUrl: './fileupload.component.html',
-    providers: [ FileUploadService ]
+    templateUrl: './fileupload.component.html'
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
   // Event to signal parent that file records have changed
@@ -21,7 +20,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   // flags whether a file upload has occurred
   hasUploadedFile: boolean = false;
 
-  // Observable subscriptions that need to be unsubscribed
+  // Observable subscriptions that need to be unsubscribed on destroy
   uploadFileSubscription: Subscription;
   submitFileMetadataSubscription: Subscription;
   findAllMetatdataSubscription: Subscription;

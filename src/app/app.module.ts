@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { FileUploadComponent } from './fileupload/fileupload.component';
+import { FileUploadService } from './fileupload/fileupload.service';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 
@@ -28,7 +29,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     FileDataTableComponent
   ],
   providers: [
-    ApiService
+    ApiService,
+    FileUploadService
   ],
   bootstrap: [AppComponent]
 })
