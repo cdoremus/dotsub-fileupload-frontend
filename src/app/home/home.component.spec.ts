@@ -12,7 +12,6 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 
 describe('Home Component', () => {
-  const html = '<my-home></my-home>';
 
   let fixture: ComponentFixture<HomeComponent>;
   let component: HomeComponent;
@@ -20,7 +19,7 @@ describe('Home Component', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ BrowserModule, FormsModule ],
-      declarations: [HomeComponent, FileUploadComponent, FileDataTableComponent, TestComponent],
+      declarations: [HomeComponent, FileUploadComponent, FileDataTableComponent],
       providers: [
         FileUploadService,
         BaseRequestOptions,
@@ -34,16 +33,9 @@ describe('Home Component', () => {
           },
         ]
       });
-    TestBed.overrideComponent(TestComponent, { set: { template: html }});
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-  });
-
-  it('should display "Home Works!"', () => {
-    const testFixture: ComponentFixture<TestComponent> = TestBed.createComponent(TestComponent);
-    testFixture.detectChanges();
-    expect(testFixture.nativeElement.children[0].textContent).toContain('Home Works!');
   });
 
     it('should contain a my-fileupload element', () => {
@@ -66,6 +58,3 @@ describe('Home Component', () => {
 
 
 });
-
-@Component({selector: 'my-test', template: ''})
-class TestComponent { }

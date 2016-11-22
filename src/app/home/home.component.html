@@ -1,7 +1,6 @@
-<p>
-  Home Works!
-</p>
 
-<my-fileupload (fileRecordsChanged)="uploadedFileRecordsChanged($event)"></my-fileupload>
+<div class="fileupload-container">
+  <my-fileupload (fileRecordsChanged)="uploadedFileRecordsChanged($event)"></my-fileupload>
 
-<my-filedatatable [fileDataList]="fileDataList"></my-filedatatable>
+  <my-filedatatable [fileDataList]="fileDataList"></my-filedatatable>
+</div>
