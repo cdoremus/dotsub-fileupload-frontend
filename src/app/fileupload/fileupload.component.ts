@@ -9,99 +9,72 @@ import { FileData } from './../shared/file.model';
     providers: [ FileUploadService ]
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
-  model: FileData;
+  // file data in form
+  currentFileData: FileData;
+  // list of all file data to be displayed in FileDataTable component
   fileDataList: Array<FileData>;
+  // contains file selected using file control
   filesToUpload: Array<File>;
+  // holds success and error messages at top of form
   message: any;
+  // flags whether a file upload has occurred
+  hasUploadedFile: boolean = false;
+
+  // Observable subscriptions that need to be unsubscribed
   private uploadFileSubscription: Subscription;
+  private submitFileMetadataSubscription: Subscription;
+  private findAllMetatdataSubscription: Subscription;
+
 
   constructor(private uploadService: FileUploadService) {
-    this.model = new FileData();
+    this.currentFileData = new FileData();
     this.filesToUpload = [];
   }
 
   ngOnInit() {
     this.fileDataList = [];
+    // initialize metatdata for list from back end
     this.findAllMetatdata();
   }
 
   ngOnDestroy() {
+      // unsubscribe from Observable subscriptions
       if (this.uploadFileSubscription) {
           this.uploadFileSubscription.unsubscribe();
       }
-  }
-
-  formSubmit(form) {
-    console.log('Form title: ' + form.title);
-    console.log('Form file: ' + form.filename);
-    console.log('Model title: ' + this.model.title);
-    if (this.filesToUpload) {
-        let file: File = this.filesToUpload[0];
-        if (file) {
-            console.log('File to upload', file);
-            this.uploadFileSubscription = this.uploadService.upload(file)
-            .subscribe((resp) => {
-                if (resp) {
-                    console.log(`Response from Spring web service`, resp);
-                    this.message = resp;
-                }
-            },
-                error => {
-                    console.log('Error in subscribe: ', error);
-                    this.message = error;
-                }
-            );
-        }
-    }
+      if (this.findAllMetatdataSubscription) {
+          this.findAllMetatdataSubscription.unsubscribe();
+      }
+      if (this.submitFileMetadataSubscription) {
+          this.submitFileMetadataSubscription.unsubscribe();
+      }
   }
 
   submitFileMetadata(form) {
-      this.uploadService.saveFileMetadata(this.model)
+     this.submitFileMetadataSubscription = this.uploadService.saveFileMetadata(this.currentFileData)
         .subscribe( resp => {
             console.log('submitFileMetadata() response: ', resp);
-            this.message = resp;
+            // resp holds FileData component including data added on back end
+            this.message = resp; // TODO: format message as string
         },
         error => {
             console.log('Error submitting file metatdata', error);
-            this.message = error;
+            this.message = error; // TODO: format message as string
         },
         // on completion, refresh metatdata list
         () => this.findAllMetatdata());
   }
 
   findAllMetatdata() {
-      // fake data
-    //   let f1: FileData = new FileData(1, 'title1', 'desc1', 'image1.png', '1/1/2016');
-    //   this.fileDataList.push(f1);
-    //   let f2: FileData = new FileData(1, 'title2', 'desc2', 'image2.png', '1/2/2016');
-    //   this.fileDataList.push(f2);
-      this.uploadService.findAllMetadata()
+      this.findAllMetatdataSubscription = this.uploadService.findAllMetadata()
         .subscribe( resp => {
             console.log('findAllMetatdata() response: ', resp);
             this.fileDataList = resp;
         },
         error => {
             console.log('Error finding all file metatdata', error);
-            this.message = error;
+            this.message = error; // TODO: format message as string
         });
-  }
-
-  uploadXhr(form) {
-    if (this.filesToUpload) {
-        let file: File = this.filesToUpload[0];
-        if (file) {
-            console.log('File to upload', file);
-            this.uploadService.uploadXhr(file)
-            .then(resp => {
-                console.log(`XHR response from Spring web service`, resp);
-                this.message = resp;
-            })
-            .catch(error => {
-                console.log('Error in XHR promise: ', error);
-                this.message = error;
-            });
-        }
-    }
   }
 
    uploadFile(fileInput: any) {
@@ -109,15 +82,16 @@ export class FileUploadComponent implements OnInit, OnDestroy {
         console.log('File selected: ', this.filesToUpload);
         if (this.filesToUpload && this.filesToUpload.length > 0) {
             let file: File = this.filesToUpload[0];
-            this.uploadService.upload(file)
+            this.uploadFileSubscription = this.uploadService.upload(file)
                 .subscribe(resp => {
-                    this.model = resp;
-                    this.message = `Upload success for file ${file.name}`;
+                    this.currentFileData = resp;
+                    this.hasUploadedFile = true;
+                    this.message = `Upload success for file '${file.name}'`;
                     console.log(this.message);
                 },
                 error => {
                     console.log('Error finding all file metatdata', error);
-                    this.message = error;
+                    this.message = error; // TODO: format message as string
                 });
         } else {
             this.message = 'No upload files available';
