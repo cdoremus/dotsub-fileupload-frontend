@@ -57,26 +57,26 @@ describe('FileUploadComponent', () => {
       expect(component.currentFileData).toBe(file);
     });
 
-    it('should set fileDataList when caling findAllMetatdata()',() => {
+    it('should call fileRecordsChanged.emit when findAllMetatdata() subscription is successful', () => {
       let service = fixture.debugElement.injector.get(FileUploadService);
       let files: Array<FileData> = [];
       files.push(new FileData(1, 'FIle 1'));
       files.push(new FileData(2, 'FIle 2'));
       spyOn(service, 'findAllMetadata').and.returnValue(Observable.of(files));
+      spyOn(component.fileRecordsChanged, 'emit');
       component.findAllMetatdata();
       fixture.detectChanges();
 
-      expect(component.fileDataList.length).toBe(2);
+      expect(component.fileRecordsChanged.emit).toHaveBeenCalled();
     });
 
-    it('should NOT set fileDataList when caling findAllMetatdata() after error thrown',() => {
+    it('should display error message when calling findAllMetatdata() with subscription error', () => {
       let service = fixture.debugElement.injector.get(FileUploadService);
       let error: Error = new Error('Problem');
       spyOn(service, 'findAllMetadata').and.returnValue(Observable.throw(error));
       component.findAllMetatdata();
       fixture.detectChanges();
 
-      expect(component.fileDataList.length).toBe(0);
       expect(component.message).toBe(error);
     });
 
@@ -158,15 +158,6 @@ describe('FileUploadComponent', () => {
       let element = fixture.nativeElement.querySelector('#uploadMessage');
 
       expect(element).toBeNull();
-    });
-
-    it('should contain a my-filedatatable element', () => {
-
-      fixture.detectChanges();
-
-      let element = fixture.nativeElement.querySelector('my-filedatatable');
-
-      expect(element).toBeDefined();
     });
 
     it('should NOT contain an element with id "upload-data-container" initially', () => {

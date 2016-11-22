@@ -1,4 +1,7 @@
 <p>
   Home Works!
 </p>
-<my-fileupload></my-fileupload>
+
+<my-fileupload (fileRecordsChanged)="uploadedFileRecordsChanged($event)"></my-fileupload>
+
+<my-filedatatable [fileDataList]="fileDataList"></my-filedatatable>

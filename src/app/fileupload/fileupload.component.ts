@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FileUploadService } from './fileupload.service';
 import { FileData } from './../shared/file.model';
@@ -9,10 +9,11 @@ import { FileData } from './../shared/file.model';
     providers: [ FileUploadService ]
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
+  // Event to signal parent that file records have changed
+  // when this component is initialized and when a new record is created
+  @Output() fileRecordsChanged: EventEmitter<Array<FileData>> = new EventEmitter<Array<FileData>>();
   // file data in form
   currentFileData: FileData;
-  // list of all file data to be displayed in FileDataTable component
-  fileDataList: Array<FileData>;
   // contains file selected using file control
   filesToUpload: Array<File>;
   // holds success and error messages at top of form
@@ -32,7 +33,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.fileDataList = [];
     // initialize metatdata for list from back end
     this.findAllMetatdata();
   }
@@ -68,7 +68,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   findAllMetatdata() {
       this.findAllMetatdataSubscription = this.uploadService.findAllMetadata()
         .subscribe( resp => {
-            this.fileDataList = resp;
+            this.fileRecordsChanged.emit(resp);
         },
         error => {
             console.log('Error finding all file metatdata', error);

@@ -14,6 +14,9 @@ import { HomeComponent } from './home.component';
 describe('Home Component', () => {
   const html = '<my-home></my-home>';
 
+  let fixture: ComponentFixture<HomeComponent>;
+  let component: HomeComponent;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ BrowserModule, FormsModule ],
@@ -29,17 +32,38 @@ describe('Home Component', () => {
             },
             deps: [MockBackend, BaseRequestOptions],
           },
-
         ]
       });
     TestBed.overrideComponent(TestComponent, { set: { template: html }});
+
+    fixture = TestBed.createComponent(HomeComponent);
+    component = fixture.componentInstance;
   });
 
   it('should display "Home Works!"', () => {
-    const fixture: ComponentFixture<TestComponent> = TestBed.createComponent(TestComponent);
-    fixture.detectChanges();
-    expect(fixture.nativeElement.children[0].textContent).toContain('Home Works!');
+    const testFixture: ComponentFixture<TestComponent> = TestBed.createComponent(TestComponent);
+    testFixture.detectChanges();
+    expect(testFixture.nativeElement.children[0].textContent).toContain('Home Works!');
   });
+
+    it('should contain a my-fileupload element', () => {
+
+      fixture.detectChanges();
+
+      let element = fixture.nativeElement.querySelector('my-fileupload');
+
+      expect(element).toBeDefined();
+    });
+
+    it('should contain a my-filedatatable element', () => {
+
+      fixture.detectChanges();
+
+      let element = fixture.nativeElement.querySelector('my-filedatatable');
+
+      expect(element).toBeDefined();
+    });
+
 
 });
 
