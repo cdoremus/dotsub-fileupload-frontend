@@ -2,7 +2,7 @@ import { FileData } from './../shared/file.model';
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { Http, BaseRequestOptions, Response, ResponseOptions } from '@angular/http';
+import { Http, BaseRequestOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { FileDataTableComponent } from './../filedatatable/filedatatable.component';
 import { FileUploadComponent } from './../fileupload/fileupload.component';
@@ -60,8 +60,8 @@ describe('FileUploadComponent', () => {
     it('should call fileRecordsChanged.emit when findAllMetatdata() subscription is successful', () => {
       let service = fixture.debugElement.injector.get(FileUploadService);
       let files: Array<FileData> = [];
-      files.push(new FileData(1, 'FIle 1'));
-      files.push(new FileData(2, 'FIle 2'));
+      files.push(new FileData(1, 'File 1', 'Desc 1'));
+      files.push(new FileData(2, 'File 2', 'Desc 2'));
       spyOn(service, 'findAllMetadata').and.returnValue(Observable.of(files));
       spyOn(component.fileRecordsChanged, 'emit');
       component.findAllMetatdata();
@@ -72,19 +72,20 @@ describe('FileUploadComponent', () => {
 
     it('should display error message when calling findAllMetatdata() with subscription error', () => {
       let service = fixture.debugElement.injector.get(FileUploadService);
-      let error: Error = new Error('Problem');
+      let error: Error = new Error('Error finding all uploaded file records');
       spyOn(service, 'findAllMetadata').and.returnValue(Observable.throw(error));
       component.findAllMetatdata();
       fixture.detectChanges();
 
-      expect(component.message).toBe(error);
+      // console.log('Actual Error Message: ', component.message);
+      expect(component.message).toContain('Error');
     });
 
-    it('should unsubscribe from findAllMetatdataSubscription when component is destroyed',() => {
+    it('should unsubscribe from findAllMetatdataSubscription when component is destroyed', () => {
       let service = fixture.debugElement.injector.get(FileUploadService);
       let files: Array<FileData> = [];
-      files.push(new FileData(1, 'FIle 1'));
-      files.push(new FileData(2, 'FIle 2'));
+      files.push(new FileData(1, 'File 1', 'Desc 1'));
+      files.push(new FileData(2, 'File 2', 'Desc 2'));
       spyOn(service, 'findAllMetadata').and.returnValue(Observable.of(files));
       fixture.detectChanges();
       spyOn(component.findAllMetatdataSubscription, 'unsubscribe');
@@ -93,17 +94,21 @@ describe('FileUploadComponent', () => {
       expect(component.findAllMetatdataSubscription.unsubscribe).toHaveBeenCalled();
     });
 
-    it('should set message when submitFileMetadata is called successfully',() => {
+    it('should set message when submitFileMetadata() is called successfully', () => {
       let service = fixture.debugElement.injector.get(FileUploadService);
-      let file: FileData = new FileData(0, 'File 1', '');
+      let file: FileData = new FileData(0, 'File 1', 'Desc 1');
       let newFile: FileData = Object.assign({}, file, {id: 1} );
+      // console.log('New file created', newFile);
+      component.currentFileData = newFile;
       spyOn(service, 'saveFileMetadata').and.returnValue(Observable.of(newFile));
       spyOn(component, 'findAllMetatdata');
       component.submitFileMetadata(file);
       fixture.detectChanges();
 
       expect(component.findAllMetatdata).toHaveBeenCalled();
-      expect(component.message.id).toBe(1);
+      console.log('Actual Seccess Message: ', component.message);
+
+      expect(component.message).toContain('data record submitted successfully');
     });
 
  });
