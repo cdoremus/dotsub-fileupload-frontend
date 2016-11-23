@@ -2,6 +2,9 @@ table, tr, th, td {
     border: 3px solid black;
     padding: 10px;
 }
+th {
+    text-align: center;
+}
 
 .centerTable {
      margin: 0px auto;
@@ -11,4 +14,15 @@ table, tr, th, td {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+}
+
+#download-message {
+    font-size: 12px;
+    font-style: italic;
+    color: #21010d;
+    margin-left: 10px;
+}
+
+td > a {
+    color: yellow;
 }
