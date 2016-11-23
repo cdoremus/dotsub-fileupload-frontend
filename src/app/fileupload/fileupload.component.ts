@@ -53,18 +53,18 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   submitFileMetadata(form) {
       // validate that title and description are filled in
       if (!this.currentFileData.title || !this.currentFileData.description) {
-          this.message = 'Title or Description are required';
+          this.message = 'Title and Description are required';
           return;
       }
      this.submitFileMetadataSubscription = this.uploadService.saveFileMetadata(this.currentFileData)
-        .subscribe( resp => {
-            console.log('submitFileMetadata() response: ', resp);
-            // resp holds FileData component including data added on back end
-            this.message = resp; // TODO: format message as string
+        .subscribe( (file: FileData) => {
+            console.log('submitFileMetadata() file metadata: ', file);
+            // file holds FileData component including data added on back end
+            this.message = `File '${file.filename}' data record submitted successfully.`;
         },
         error => {
-            console.log('Error submitting file metatdata', error);
-            this.message = error; // TODO: format message as string
+            console.log(`Error submitting file metatdata for for ${this.currentFileData.filename}`, error);
+            this.message = this._parseErrorMessage(`Error submitting file metatdata record for ${this.currentFileData.filename}:`, error);
         },
         // on completion, refresh metatdata list
         () => this.findAllMetatdata());
@@ -76,8 +76,8 @@ export class FileUploadComponent implements OnInit, OnDestroy {
             this.fileRecordsChanged.emit(resp);
         },
         error => {
-            console.log('Error finding all file metatdata', error);
-            this.message = error; // TODO: format message as string
+            console.log('Error finding all file records', error);
+            this.message = this._parseErrorMessage(`Error finding all uploaded file records:`, error);
         });
   }
 
@@ -86,20 +86,39 @@ export class FileUploadComponent implements OnInit, OnDestroy {
         // console.log('File selected: ', this.filesToUpload);
         if (this.filesToUpload && this.filesToUpload.length > 0) {
             let file: File = this.filesToUpload[0];
+            // validate size < 2MB
+            if (file.size > 2000000) {
+                this.message = `Size of file ${file.name} is too large. Please select a file less than 2MB.`;
+                return;
+            }
             this.uploadFileSubscription = this.uploadService.upload(file)
                 .subscribe(resp => {
                     this.currentFileData = resp;
                     this.hasUploadedFile = true;
-                    this.message = `Upload success for file '${file.name}'`;
+                    this.message = `File '${file.name}' uploaded successfully. Please fill in title and description`;
                     console.log(this.message);
                 },
                 error => {
-                    console.log('Error finding all file metatdata', error);
-                    this.message = error; // TODO: format message as string
+                    console.log('Error uploading file file metatdata', error);
+                    this.message = this._parseErrorMessage(`Error uploading file ${file.name} with size ${file.size}:`, error);
                 });
         } else {
             this.message = 'No upload files available';
             console.log(this.message);
         }
+    }
+
+    _parseErrorMessage(message: string, error: any): string {
+        try { // try to parse out message
+            let json = JSON.parse(error._body);
+            console.log('Error body parsed', json);
+            let msg = `${message}: ${json.message}`;
+            console.log(`Parsed message returned: ${msg}`);
+            return msg ;
+        } catch (e) {
+            console.log(`Problem parsing error message`, e);
+            return `Error finding all uploaded file records`;
+        }
+
     }
 }

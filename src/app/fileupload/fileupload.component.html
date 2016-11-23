@@ -1,6 +1,6 @@
 <div id="form-container">
   <div>
-    <div id="uploadMessage" *ngIf="message">{{ message | json }}</div>
+    <div id="uploadMessage" *ngIf="message">{{ message }}</div>
   </div>
   <form id="upload-form" #form="ngForm" (ngSubmit)="submitFileMetadata(form.value)" novalidate>
       <label class="control-label label-title">Please Choose File to Upload</label>
