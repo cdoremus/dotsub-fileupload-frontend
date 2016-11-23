@@ -1,8 +1,21 @@
 // styles in src/style directory are applied to the whole page
 body {
-    background: #0147A7;
+    background: #2356a8;
     color: #fff;
 }
-a {
+/*a {
     color: #03A9F4;
+}*/
+
+a:visited {
+  color: black;
 }
+
+a:link {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+

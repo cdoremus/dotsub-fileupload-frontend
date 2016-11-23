@@ -3,8 +3,44 @@
   display: block;
 }
 
+* {
+  color: #FFEF00;
+}
+
+img {
+  width: 100px;
+  margin-right: 25px;
+}
+
+#nav-links {
+  float: right;
+}
+
+#nav-links a {
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+#nav-links a:visited {
+  color: black;
+}
+
+#nav-links a:link {
+  color: white;
+}
+
+#nav-links a:hover {
+  color: white;
+}
+
+h3 {
+  font-size: 20px;
+  color: white;
+}
+
+
 header {
-  background-color: #fff;
+  background-color: blue;
   padding: 16px;
   position: fixed;
   top: 0;

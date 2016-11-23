@@ -2,40 +2,36 @@
   <div>
     <div id="uploadMessage" *ngIf="message">{{ message | json }}</div>
   </div>
-  <form id="upload-form" class="form-horizontal" #form="ngForm" (ngSubmit)="submitFileMetadata(form.value)" novalidate>
-    <div class="form-group">
-      <label class="control-label">Please Choose File to Upload</label>
-      <input type="file" name="uploadedFile" (change)="uploadFile($event)"/>
+  <form id="upload-form" #form="ngForm" (ngSubmit)="submitFileMetadata(form.value)" novalidate>
+      <label class="control-label label-title">Please Choose File to Upload</label>
+    <div class="form-group fieldset">
+      <input type="file"  class="form-control" name="uploadedFile" (change)="uploadFile($event)"/>
     </div>
     <div id="upload-data-container" *ngIf="hasUploadedFile">
-      <div class="form-group">
+      <label class="control-label label-title">Please Submit File Title and Description</label>
+      <div class="form-group fieldset">
         <input type="hidden" name="id" [(ngModel)]="currentFileData.id" />
-        <label class="control-label">ID</label>
-        <label class="control-label">{{ currentFileData.id }}</label>
+        <label class="control-label">Record ID</label>
+        <input type="text" class="form-control"  name="displayId" [(ngModel)]="currentFileData.id" disabled="true">
       </div>
-      <div class="form-group" [class.has-error]="title.invalid && title.touched">
+      <div class="form-group fieldset" [class.has-error]="title.invalid && title.touched">
         <label id="title-label" class="control-label form-label">Title</label>
-        <input type="text" class="form-control" #title="ngModel" name="title" [(ngModel)]="currentFileData.title" placeholder="Enter Title"/>
-        <div *ngIf="title.invalid && title.touched" class="alert alert-danger">
-            Title is required.
-        </div>
+          <input type="text" class="form-control" #title="ngModel" name="title" [(ngModel)]="currentFileData.title"
+          placeholder="Enter Title"/>
       </div>
-      <div class="form-group" [class.has-error]="description.invalid && description.touched">
+      <div class="form-group fieldset" [class.has-error]="description.invalid && description.touched">
         <label class="control-label">Description</label>
-        <input type="text" class="form-control" #description="ngModel"  name="description" [(ngModel)]="currentFileData.description" placeholder="Enter Description"/>
-        <div *ngIf="description.invalid && description.touched" class="alert alert-danger">
-            Description is required.
-        </div>
+          <input type="text" class="form-control" #description="ngModel"  name="description" [(ngModel)]="currentFileData.description" placeholder="Enter Description"/>
       </div>
-      <div class="form-group">
+      <div class="form-group fieldset">
         <label class="control-label">File name</label>
         <input type="text" class="form-control" #filename="ngModel"
-          name="filename" [(ngModel)]="currentFileData.filename" disabled="true"/>
+          name="filename" [ngModel]="currentFileData.filename" disabled="true"/>
       </div>
-      <div class="form-group">
+      <div class="form-group fieldset">
         <label class="control-label">Creation date</label>
         <input type="text" class="form-control" #createDate="ngModel"
-          name="createDate" [(ngModel)]="currentFileData.createDate"  disabled="true"/>
+          name="createDate" [ngModel]="currentFileData.createDate"  disabled="true"/>
       </div>
       <input type="submit"  class="btn btn-primary" value="Submit"/>
     </div>
