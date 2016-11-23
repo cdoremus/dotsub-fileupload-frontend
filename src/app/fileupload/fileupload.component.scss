@@ -1,17 +1,59 @@
 #form-container {
-    width: 600px;
-    padding: 15px;
+    width: 65%;
+    padding: 20px;
+    margin: 0px auto;
 }
 
 div#uploadMessage {
     border: 2px solid black;
-    color:black;
+    border-radius: 20px;
+    color: #440524;
     padding: 15px;
+    margin-bottom: 20px;
 }
 
-.control-label.form-label {
+#upload-form div.form-group.fieldset {
     text-align: left;
-    max-width: 20%;
-    color:magenta;
-    text-decoration: underline;
+    margin: 10px;
 }
+
+input.form-control[disabled] {
+    background-color: gray;
+}
+
+#upload-form label.control-label.label-title {
+    font-size: 16px;
+    color: black;
+}
+
+input[type="submit"] {
+    margin-bottom: 10px;
+}
+
+/** These styles create a fieldset legend effect around a group of elements **/
+
+.legend-fieldset
+{
+    border: 1px solid #ddd;
+    margin-top: 1em;
+    width: 120%;
+}
+
+.legend-fieldset h1
+{
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.legend-fieldset h1 span
+{
+    display: inline;
+    border: 1px solid #ddd;
+    background: cornflowerblue;
+    padding: 5px 10px;
+    position: relative;
+    top: -1.3em;
+    color: black;
+}
+

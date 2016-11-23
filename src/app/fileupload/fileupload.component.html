@@ -7,8 +7,9 @@
     <div class="form-group fieldset">
       <input type="file"  class="form-control" name="uploadedFile" (change)="uploadFile($event)"/>
     </div>
-    <div id="upload-data-container" *ngIf="hasUploadedFile">
-      <label class="control-label label-title">Please Submit File Title and Description</label>
+    <div id="upload-data-container" class="legend-fieldset" *ngIf="hasUploadedFile">
+      <h1><span>Please Submit File Title and Description</span></h1>
+      <!-- label class="control-label label-title">Please Submit File Title and Description</label -->
       <div class="form-group fieldset">
         <input type="hidden" name="id" [(ngModel)]="currentFileData.id" />
         <label class="control-label">Record ID</label>
@@ -16,12 +17,19 @@
       </div>
       <div class="form-group fieldset" [class.has-error]="title.invalid && title.touched">
         <label id="title-label" class="control-label form-label">Title</label>
-          <input type="text" class="form-control" #title="ngModel" name="title" [(ngModel)]="currentFileData.title"
-          placeholder="Enter Title"/>
-      </div>
+        <input type="text" class="form-control" #title="ngModel" name="title" [(ngModel)]="currentFileData.title"
+          placeholder="Enter Title" required/>
+        <div *ngIf="title.invalid && title.touched" class="alert alert-danger">
+                Title is required.
+        </div>
+       </div>
       <div class="form-group fieldset" [class.has-error]="description.invalid && description.touched">
         <label class="control-label">Description</label>
-          <input type="text" class="form-control" #description="ngModel"  name="description" [(ngModel)]="currentFileData.description" placeholder="Enter Description"/>
+        <input type="text" class="form-control" #description="ngModel"  name="description" [(ngModel)]="currentFileData.description"
+            placeholder="Enter Description" required/>
+        <div *ngIf="description.invalid && description.touched" class="alert alert-danger">
+                  Description is required.
+        </div>
       </div>
       <div class="form-group fieldset">
         <label class="control-label">File name</label>
