@@ -5,9 +5,10 @@
 }
 
 div#uploadMessage {
-    border: 2px solid black;
+    border: 3px solid #81c673;
     border-radius: 20px;
-    color: #440524;
+    font-weight: bold;
+    color: #81c673;
     padding: 15px;
     margin-bottom: 20px;
 }
@@ -23,7 +24,7 @@ input.form-control[disabled] {
 
 #upload-form label.control-label.label-title {
     font-size: 16px;
-    color: black;
+    color: #f2bb80;
 }
 
 input[type="submit"] {

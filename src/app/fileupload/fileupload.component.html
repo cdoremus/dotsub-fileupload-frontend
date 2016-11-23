@@ -3,7 +3,7 @@
     <div id="uploadMessage" *ngIf="message">{{ message }}</div>
   </div>
   <form id="upload-form" #form="ngForm" (ngSubmit)="submitFileMetadata(form.value)" novalidate>
-      <label class="control-label label-title">Please Choose File to Upload</label>
+      <label class="control-label label-title">Please Choose a File to Upload</label>
     <div class="form-group fieldset">
       <input type="file"  class="form-control" name="uploadedFile" (change)="uploadFile($event)"/>
     </div>
