@@ -5,7 +5,7 @@ import { FileData } from './../shared/file.model';
 
 @Component({
     selector: 'my-fileupload',
-    styleUrls: [ './fileupload.component.css' ],
+    styleUrls: [ './fileupload.component.scss' ],
     templateUrl: './fileupload.component.html'
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
