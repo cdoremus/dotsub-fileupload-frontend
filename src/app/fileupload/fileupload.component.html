@@ -7,9 +7,8 @@
     <div class="form-group fieldset">
       <input type="file"  class="form-control" name="uploadedFile" (change)="uploadFile($event)"/>
     </div>
-    <div id="upload-data-container" class="legend-fieldset" *ngIf="hasUploadedFile">
-      <h1><span>Please Submit File Title and Description</span></h1>
-      <!-- label class="control-label label-title">Please Submit File Title and Description</label -->
+    <div id="upload-data-container" *ngIf="hasUploadedFile">
+      <label class="control-label label-title">Please Enter and Submit File Title and Description</label>
       <div class="form-group fieldset">
         <input type="hidden" name="id" [(ngModel)]="currentFileData.id" />
         <label class="control-label">Record ID</label>
