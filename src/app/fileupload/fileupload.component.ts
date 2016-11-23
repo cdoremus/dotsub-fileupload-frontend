@@ -51,6 +51,11 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   }
 
   submitFileMetadata(form) {
+      // validate that title and description are filled in
+      if (!this.currentFileData.title || !this.currentFileData.description) {
+          this.message = 'Title or Description are required';
+          return;
+      }
      this.submitFileMetadataSubscription = this.uploadService.saveFileMetadata(this.currentFileData)
         .subscribe( resp => {
             console.log('submitFileMetadata() response: ', resp);
