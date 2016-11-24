@@ -8,6 +8,9 @@
   according to requirements outlined below. Requirement implementations are also noted.
   </p>
   <p>
+    Also note the section below titled Application Todos and Bugs that details additional work that needs to be done on this application.
+  </p>
+  <p>
     See the Readme file in the dotsub-fileupload-frontend Github repository for more details on the Angular 2 project.
     The web service back end code is located in the dotsub-fileupload-backend Github repository.
     There is also a Readme file in that project for details on the Spring Rest Controller back end.
@@ -17,7 +20,7 @@
 <div id="requirements" class="section-container">
   <h3 class="section-title">Requirements</h3>
   <p>
-    A description of a requirement's' implementation is noted <span style="color: #f2bb80;font-weight: bold;">in pink</span> besides each requirement.
+    A description of a requirement's implementation is noted <span style="color: #f2bb80;font-weight: bold;">in pink</span> besides each requirement.
   </p>
   <p>
   Create a simple web project, that provides a form to upload a file and gather some metadata for that file: Title, Description and Creation date
@@ -36,7 +39,8 @@
         on the front end and JUnit and Spring Testing Tools and Checkstyle on the back end.
         The front-end build employed Webpack while Gradle was used to build the back-end web service.</span></li>
     <li> You may also submit with the project any design considerations, restrictions, or possible future enhancements (if applicable)
-      <span class="answer">See the Readme files in the front-end and back-end Github repositories for details.</span></li>
+      <span class="answer">See the next section (Application Todos and Bugs) and the Readme files in the front-end and back-end Github
+        repositories for details.</span></li>
   </ul>
 
   <p>
@@ -45,4 +49,87 @@
     file upload form on the home page. </span>
   </p>
 
+</div>
+
+<div id="application-todos" class="section-container">
+  <h3 class="section-title">Application Todos and Bugs</h3>
+
+<h4>Front End</h4>
+  <ul>
+    <li>
+      Improve UX by creating more natural two-step file upload process.
+    </li>
+    <li>
+      Make back-end URL and endpoints externally configurable and dependency injected at application startup
+    </li>
+    <li>
+      Add edit/delete links to each row in the Uploaded Files table and implement the edit/delete functionality. This would allow incomplete records to be completed.
+    </li>
+    <li>
+      Put the Uploaded Files table in a modal popup or off to the side of the form
+    </li>
+    <li>
+      Ad Redux or ngrx for state management. Right now, the form's state is lost when navigating to the About page and back.
+    </li>
+    <li>
+      Separate out a message component that includes dynamic styling using Bootstrap alert classes depending on the nature of the message.
+    </li>
+    <li>
+      Create a parent component to hold a FileUploadFormComponent and FileUploadDataTableComponent instance
+    </li>
+    <li>
+      Bug: If a second file is selected after a file has just been uploaded, the Title and Description validation is triggered
+    </li>
+    <li>
+      Make better use of SASS. Right now the *.scss files just hold css.
+    </li>
+    <li>
+      Use Angular 2 ahead-of-time compilation to reduce the size of the deployed application. Tree shaking with Webpack can also help in this matter.
+    </li>
+    <li>
+      Use Angular 2 Router lazy-loading to improve application startup time
+    </li>
+    <li>
+      Do sanitation checks to prevent XSS
+    </li>
+    <li>
+      Implement authentication and access control so that a user can only see his/her files
+    </li>
+    <li>
+      Improve unit test code coverage
+    </li>
+    <li>
+      Improve E2E tests
+    </li>
+  </ul>
+<h4>Back End</h4>
+  <ul>
+    <li>
+      Make CrossOrigin URLs configurable for different clients
+    </li>
+    <li>
+      Make webservice URL configurable to allow moving the web service to different servers
+    </li>
+    <li>
+      Move data to a persistence SQL or NoSQL database
+    </li>
+    <li>
+      Create a Delete endpoint to allow the client to delete the file and file metadata record.
+    </li>
+    <li>
+      Delete the file record when the file upload fails.
+    </li>
+    <li>
+      Add version number to endpoint URLs
+    </li>
+    <li>
+      Improve endpoint naming
+    </li>
+    <li>
+      Measure and improve unit test coverage
+    </li>
+    <li>
+      Move validation logic in the controller into the service class.
+    </li>
+  </ul>
 </div>
