@@ -7,3 +7,16 @@
 h3.section-title {
   text-align: center;
 }
+
+.answer {
+  color: #f2bb80;
+  font-weight: bold;
+}
+
+.answer::before {
+  content: ' Implementation: ';
+  color: #f2bb80;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.5rem;
+}

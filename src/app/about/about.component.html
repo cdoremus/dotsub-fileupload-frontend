@@ -4,40 +4,44 @@
 
   <p>
   This application allows a user to upload a file to a remote server
-  and enter the title and description of the uploaded file. It is designed
-  according to requirements outlined below.
+  and enter the title and description of the uploaded file that is persisted on a back end server. It is designed
+  according to requirements outlined below. Requirement implementations are also noted.
   </p>
   <p>
-    The optional requirement noted below has been completed and a list of uploaded files
-    is shown at the bottom of the file upload form on the Home page.
-  </p>
-  <p>
-    See the Readme file in the dotsub-fileupload-frontend Github repository for more details on the project
-    and how the requirements were fulfilled.
+    See the Readme file in the dotsub-fileupload-frontend Github repository for more details on the Angular 2 project.
     The web service back end code is located in the dotsub-fileupload-backend Github repository.
-    There is also a Readme file in that project for details on the Spring Rest Controller back end and its role in
-    satisfying the requirements.
+    There is also a Readme file in that project for details on the Spring Rest Controller back end.
   </p>
 </div>
 
 <div id="requirements" class="section-container">
   <h3 class="section-title">Requirements</h3>
   <p>
+    A description of a requirement's' implementation is noted <span style="color: #f2bb80;font-weight: bold;">in pink</span> besides each requirement.
+  </p>
+  <p>
   Create a simple web project, that provides a form to upload a file and gather some metadata for that file: Title, Description and Creation date
   </p>
   <ul>
-    <li> The UI can be implemented in any SPA framework of your choice.</li>
-    <li> The REST back-end will be preferably implemented based on Java/Spring Boot (+ any Spring/Java library/framework of your choice) to store data.</li>
-    <li> No user authentication and security features are needed.</li>
-    <li> Project can use simple in-memory DB to store data</li>
-    <li> Files can be stored in web server file system.</li>
-    <li> No need to implement routing or sophisticated state management in UI (e.g. FLUX)</li>
-    <li> Project can use any quality assurance mechanisms or build tools of choice</li>
-    <li> You may also submit with the project any design considerations, restrictions, or possible future enhancements (if applicable)</li>
+    <li> The UI can be implemented in any SPA framework of your choice. <span class="answer">I chose Angular 2</span></li>
+    <li> The REST back-end will be preferably implemented based on Java/Spring Boot (+ any Spring/Java library/framework of your choice) to store data.
+      <span class="answer">Spring Boot web service using RestController and Spring Data JPA for persistence</span></li>
+    <li> No user authentication and security features are needed. <span class="answer">No authentication was done.
+      HTML escaping was done on the back end to help prevent XSS attacks from persisted data.</span></li>
+    <li> Project can use simple in-memory DB to store data. <span class="answer">H2 in-memory database backed by Hibernate was used</span></li>
+    <li> Files can be stored in web server file system. <span class="answer">Uploaded files are stored on web server in upload-dir folder</span></li>
+    <li> No need to implement routing or sophisticated state management in UI (e.g. FLUX). <span class="answer">No state management was used on the front end</span></li>
+    <li> Project can use any quality assurance mechanisms or build tools of choice.
+      <span class="answer">Quality assurance used Jasmine, Karma and Protractor for testing and Tslint
+        on the front end and JUnit and Spring Testing Tools and Checkstyle on the back end.
+        The front-end build employed Webpack while Gradle was used to build the back-end web service.</span></li>
+    <li> You may also submit with the project any design considerations, restrictions, or possible future enhancements (if applicable)<span class="answer"></span></li>
   </ul>
 
   <p>
   (Optional) Create an additional view where the user can see the list of uploaded items. Each line will show the Title, Description, Creation date and a link to download the file.
+  <span class="answer">This view is encapsulated the FileUploadDataTableComponent whose template is displayed on the bottom of the
+    file upload form on the home page. </span>
   </p>
 
 </div>
