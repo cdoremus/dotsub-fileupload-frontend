@@ -32,16 +32,14 @@ The application should then be running at [http://localhost:8000](http://localho
 This application uses Angular 2 and is build using components and structured according to best
 practices outlined in the [Angular 2 Style Guide](https://angular.io/styleguide).
 
-The flow of application use is done in the following steps:
+The flow of application use is done in the following steps
+
 1. The user browses to the home page and is displayed a form to upload a file.
-  - if any file upload records are present in the backend database, an Uploaded Files table
-  containing those records is shown at the bottom of the page.
+  * if any file upload records are present in the backend database, an Uploaded Files table containing those records is shown at the bottom of the page.
 2. The user selects a file to upload.
-  - selection of the file triggers an Http request to the back end to upload the file and
-create the file metadata record in the backend database.
+  * selection of the file triggers an Http request to the back end to upload the file and create the file metadata record in the backend database.
 3. The user is shown the metadata form and asked to enter the file title and description.
-  - upon display, the metadata form is populated with the file record ID, file name and record creation date.
-  This data is shown in read-only fields.
+  * upon display, the metadata form is populated with the file record ID, file name and record creation date. This data is shown in read-only fields.
 4. After filling out the metadata form, the user submits the form and the Uploaded Files table is refreshed
 with the new data record.
 
