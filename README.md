@@ -5,19 +5,19 @@ file upload form that also collects file metadata (title, description, file name
 and creation date).
 
 This application is paired with a Spring Framework Rest Controller back end
-to persist the uploaded file and metadata (found in the dotsub-fileupload-backend repository).
+to persist the uploaded file and metadata (found in the fileupload-demo-backend repository).
 
 ## Running the Angular 2 application
 
 Prior to running the application, you need to start the back-end web service
-(see Readme.md in the dotsub-fileupload-backend repository).
+(see Readme.md in the fileupload-demo-backend repository).
 
 ```bash
 # clone this repo
-$ git clone https://github.com/cdoremus/dotsub-fileupload-frontend.git
+$ git clone https://github.com/cdoremus/fileupload-demo-angular2.git
 
 # change directory
-$ cd dotsub-fileupload-frontend
+$ cd fileupload-demo-angular2
 
 # install the dependencies with npm
 $ npm install
